@@ -16,4 +16,5 @@ export class ClienteService {
     //return of(CLIENTES);
     return this.http.get<Cliente[]>(this.urlEndPoint);
   }
+  create(cliente: Cliente) : Observable<Cliente>
 }
