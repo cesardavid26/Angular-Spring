@@ -30,7 +30,7 @@ cargarCliente():void{
   })
 }
 
-  public create(): void{
+  create(): void{
   this.clienteService.create(this.cliente)
   .subscribe(cliente => {
       this.router.navigate(['/clientes'])
@@ -39,6 +39,16 @@ cargarCliente():void{
   }
 
   )
+  }
+
+  update(): void{
+    this.clienteService.update(this.cliente)
+    .subscribe( cliente => {
+      this.router.navigate(['/clientes'])
+      swal.fire('Cliente actualizado', `Cliente ${cliente.nombre} actualiado con exito!`, 'success')
+      swal.update({icon: 'success'});
+    }
+    )
   }
 
 }
