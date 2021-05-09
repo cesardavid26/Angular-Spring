@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Cliente} from './cliente'
 import {ClienteService} from './cliente.service'
-import {Router} from '@angular/router'
+import {Router, ActivatedRoute} from '@angular/router'
 import swal from 'sweetalert2';
 
 @Component({
@@ -13,11 +13,23 @@ export class FormComponent implements OnInit {
  cliente:Cliente = new Cliente()
  titulo:string ="Crear cliente"
 
-  constructor(private clienteService: ClienteService,
-    private router: Router) { }
 
-  ngOnInit(): void {
+  constructor(private clienteService: ClienteService,
+    private router: Router,private activatedRoute: ActivatedRoute ) { }
+
+  ngOnInit() {
+    this.cargarCliente()
   }
+
+cargarCliente():void{
+  this.activatedRoute.params.subscribe(params => {
+    let id= params['id']
+    if(id){
+      this.clienteService.getCliente(id).subscribe( (cliente) => this.cliente = cliente)
+    }
+  })
+}
+
   public create(): void{
   this.clienteService.create(this.cliente)
   .subscribe(cliente => {
