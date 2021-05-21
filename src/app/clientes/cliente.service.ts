@@ -19,8 +19,9 @@ private httpHeaders= new HttpHeaders({'Content-Type': 'application/json'})
     //return of(CLIENTES);
     return this.http.get<Cliente[]>(this.urlEndPoint);
   }
-  create(cliente: Cliente) : Observable<any>{
-    return this.http.post<Cliente>(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
+  create(cliente: Cliente) : Observable<Cliente>{
+    return this.http.post(this.urlEndPoint, cliente, {headers: this.httpHeaders}).pipe(
+      map((response: any) => response.cliente as Cliente),
       catchError(e=> {
         console.error(e.error.mensaje);
         swal.fire(e.error.menaje, e.error.error, 'error');

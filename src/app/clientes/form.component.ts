@@ -32,9 +32,9 @@ cargarCliente():void{
 
   create(): void{
   this.clienteService.create(this.cliente)
-  .subscribe(json => {
+  .subscribe(cliente => {
       this.router.navigate(['/clientes'])
-      swal.fire('Nuevo cliente', ` ${json.mensaje}: ${json.cliente.nombre}  `, 'success')
+      swal.fire('Nuevo cliente', `El cliente ${cliente.nombre} ha sido creado con éxito! `, 'success')
       swal.update({icon: 'success'});
   }
 
